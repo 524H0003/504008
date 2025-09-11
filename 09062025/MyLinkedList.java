@@ -47,7 +47,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
     public E removeCurr(Node<E> curr) throws NoSuchElementException {
         Node<E> a = head, b = head;
 
-        while (a != null && a.equals(curr)) {
+        while (a != null && a != curr) {
             b = a;
             a = a.getNext();
         }
@@ -56,7 +56,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
             throw new NoSuchElementException("Element not existed");
         }
 
-        return a.getData().equals(b) ? removeFirst() : removeAfter(b);
+        return a == b ? removeFirst() : removeAfter(b);
 
     }
 
@@ -64,7 +64,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
     public void removeCurr(E curr) throws NoSuchElementException {
         Node<E> a = head, b = head;
 
-        while (a != null && a.getData().equals(curr)) {
+        while (a != null && a.getData() != curr) {
             b = a;
             a = a.getNext();
         }
@@ -73,7 +73,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
             throw new NoSuchElementException("Element not existed");
         }
 
-        if (a.equals(b)) {
+        if (a == b) {
             removeFirst();
         } else {
             removeAfter(b);
@@ -94,8 +94,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
     }
 
     @Override
-    public E removeAfter(Node<E> curr) throws
-            NoSuchElementException {
+    public E removeAfter(Node<E> curr) throws NoSuchElementException {
         if (curr == null) {
             throw new NoSuchElementException("Can 't remove element from an empty list");
         } else {

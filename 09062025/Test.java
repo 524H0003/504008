@@ -8,7 +8,7 @@ public class Test {
         list.addLast(new Integer(3));
         list.addLast(target);
         list.print();
-        list.removeCurr(list.getHead());
+        list.removeCurr(list.getHead().getData());
         list.print();
     }
 }
