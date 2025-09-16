@@ -1,8 +1,6 @@
-
 import java.util.NoSuchElementException;
 
 public class MyLinkedList<E> implements ListInterface<E> {
-
     private Node<E> head;
     private int numNode;
 
@@ -44,59 +42,21 @@ public class MyLinkedList<E> implements ListInterface<E> {
     }
 
     @Override
-    public E removeCurr(Node<E> curr) throws NoSuchElementException {
-        Node<E> a = head, b = head;
-
-        while (a != null && a != curr) {
-            b = a;
-            a = a.getNext();
-        }
-
-        if (a == null) {
-            throw new NoSuchElementException("Element not existed");
-        }
-
-        return a == b ? removeFirst() : removeAfter(b);
-
-    }
-
-    @Override
-    public void removeCurr(E curr) throws NoSuchElementException {
-        Node<E> a = head, b = head;
-
-        while (a != null && !a.getData().equals(curr)) {
-            b = a;
-            a = a.getNext();
-        }
-
-        if (a == null) {
-            throw new NoSuchElementException("Element not existed");
-        }
-
-        if (a == b) {
-            removeFirst();
-        } else {
-            removeAfter(b);
-        }
-    }
-
-    @Override
     public E removeFirst() throws NoSuchElementException {
         if (head == null) {
-            throw new NoSuchElementException("Can 't remove element from an empty list");
+            throw new NoSuchElementException("Can't remove element from an empty list");
         } else {
             Node<E> tmp = head;
             head = head.getNext();
             numNode--;
             return tmp.getData();
         }
-
     }
 
     @Override
     public E removeAfter(Node<E> curr) throws NoSuchElementException {
         if (curr == null) {
-            throw new NoSuchElementException("Can 't remove element from an empty list");
+            throw new NoSuchElementException("Can't remove element from an empty list");
         } else {
             Node<E> delNode = curr.getNext();
             if (delNode != null) {
@@ -104,7 +64,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
                 numNode--;
                 return delNode.getData();
             } else {
-                throw new NoSuchElementException("No next node to remove ");
+                throw new NoSuchElementException("No next node to remove");
             }
         }
     }
@@ -112,7 +72,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
     @Override
     public E removeLast() throws NoSuchElementException {
         if (head == null) {
-            throw new NoSuchElementException("Can 't remove element from an empty list");
+            throw new NoSuchElementException("Can't remove elementfrom an empty list");
         } else {
             Node<E> preNode = null;
             Node<E> delNode = head;
@@ -140,7 +100,6 @@ public class MyLinkedList<E> implements ListInterface<E> {
                 tmp = tmp.getNext();
             }
             System.out.println();
-
         } else {
             System.out.println("List is empty!");
         }
@@ -148,16 +107,15 @@ public class MyLinkedList<E> implements ListInterface<E> {
 
     @Override
     public boolean isEmpty() {
-        if (numNode == 0) {
+        if (numNode == 0)
             return true;
-        }
         return false;
     }
 
     @Override
     public E getFirst() throws NoSuchElementException {
         if (head == null) {
-            throw new NoSuchElementException("Can 't get element from an empty list");
+            throw new NoSuchElementException("Can't get element from an empty list");
         } else {
             return head.getData();
         }
@@ -177,11 +135,53 @@ public class MyLinkedList<E> implements ListInterface<E> {
     public boolean contains(E item) {
         Node<E> tmp = head;
         while (tmp != null) {
-            if (tmp.getData().equals(item)) {
+            if (tmp.getData().equals(item))
                 return true;
-            }
             tmp = tmp.getNext();
         }
         return false;
+    }
+
+    public void removeCurr(E curr) {
+        Node<E> q, p;
+        p = head;
+        q = head;
+        while (p != null) {
+            if (p.getData().equals(curr))
+                break;
+            q = p;
+            p = p.getNext();
+        }
+        if (p != null) {
+            q.setNext(p.getNext());
+        }
+    }
+
+    public E removeCurr(Node<E> curr) {
+        Node<E> q, p;
+        p = head;
+        q = head;
+        while (p != null) {
+            if (p.getData().equals(curr.getData()))
+                break;
+            q = p;
+            p = p.getNext();
+        }
+        if (p != null) {
+            q.setNext(p.getNext());
+            return p.getData();
+        }
+        return null;
+    }
+
+    public int countEven() {
+        Node<E> p = head;
+        int c = 0;
+        while (p != null) {
+            if ((int) p.getData() % 2 == 0)
+                ++c;
+            p = p.getNext();
+        }
+        return c;
     }
 }
