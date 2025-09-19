@@ -9,5 +9,6 @@
         "**/*.class": true,
         "**/*.pdf": true
     },
-    "explorerExclude.backup": {}
+    "explorerExclude.backup": {},
+    "java.inlayHints.parameterNames.enabled": "none"
 }
